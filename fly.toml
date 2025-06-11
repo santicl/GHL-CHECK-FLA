@@ -1,4 +1,4 @@
-app = "ghl-checkava"
+app = "ghl-check-flamante"
 primary_region = "bog"
 
 # Configuración de construcción (elige entre Dockerfile o Buildpacks)
