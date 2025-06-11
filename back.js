@@ -5,12 +5,7 @@ const cors = require('cors');
 const app = express();
 
 // Configuración de CORS más completa
-app.use(cors({
-  origin: 'https://paue.com.co', // <--- mejor si defines tu origen exacto
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type'],
-  credentials: true, // Opcional: solo si usas cookies o auth
-}));
+app.use(cors({}));
 
 // Middleware para permitir respuestas a preflight requests
 app.options('*', cors());
@@ -19,7 +14,7 @@ app.options('*', cors());
 app.use(express.json());
 
 // Configuración del puerto
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.set('port', PORT);
 
 console.log(`🚀 Puerto configurado: ${PORT}`);

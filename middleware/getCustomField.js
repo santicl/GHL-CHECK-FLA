@@ -11,7 +11,7 @@ const getCustomFields = async (req, res, next) => {
     try {
         const response = await axios.get(API_CUSTOM_FIELDS, {
             headers: {
-                'Authorization': `Bearer ${process.env.API_KEY_PAUE}`,
+                'Authorization': `Bearer ${process.env.API_KEY_FLAMANTE}`,
                 'Content-Type': 'application/json'
             }
         });

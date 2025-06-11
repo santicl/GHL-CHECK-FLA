@@ -14,23 +14,23 @@ const validateDateMatches = async (req, res, next) => {
 
         let totalAdditionalPeople = 0;
 
-        submissionsData.filter(submission => {
-            const submissionDate = submission.byn83cFhzqjbcoELPxSo;
-            
-            const personasClient = Number(submission['8gdQMzcZPfR6G0sNkmKX']) || 0;
-            const personasAfiliados = Number(submission['YghfEfFA7h5MW0p8qWXs']) || 0;
-            
-            // Sumamos ambos
-            const personas = personasClient + personasAfiliados;
-            console.log(personasClient, personasAfiliados)
+        //console.log(submissionsData)
 
-            //console.log(personas, submissionDate)
+        submissionsData.filter(submission => {
+            const submissionDate = submission.EmpYNzeziZpMDUh6PypQ;
+            const numberAdult = parseInt(submission.ZX7OoZj1AB4fuDkULkL4, 10) || 0;
+            const numberChilds= parseInt(submission.iuvJPK52pWDuFdsUICir, 10) || 0;
+            const numberInfants = parseInt(submission.CEoZMyXaO4gffLggAIZL, 10) || 0;
+            const peoples = numberAdult + numberChilds + numberInfants;
 
             // Se suma la fecha si coincide
             if (submissionDate === fecha) {
                 //console.log('Existe coincidencia', submissionDate, personas)
-                totalAdditionalPeople += personas;
+                totalAdditionalPeople += peoples;
             }
+
+            console.log('Fechas: ' + submissionDate + ' / ' + fecha)
+            console.log(totalAdditionalPeople)
         
             return submissionDate === fecha;
         }).length;
@@ -39,6 +39,7 @@ const validateDateMatches = async (req, res, next) => {
         // Cantidad de personas total
         const availablePlaces = numberAvailable - totalAdditionalPeople;
         const avaNumber = numberAvailable - totalAdditionalPeople;
+        console.log(availablePlaces, avaNumber)
 
         // Cupos a solicitar es mayor a cupos disponibles
         if (numberPerson > availablePlaces) {

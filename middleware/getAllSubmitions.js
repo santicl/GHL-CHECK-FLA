@@ -5,7 +5,7 @@ const getSubmissions = async (url) => {
     try {
         const response = await axios.get(url, {
             headers: {
-                'Authorization': `Bearer ${process.env.API_KEY_PAUE}`,
+                'Authorization': `Bearer ${process.env.API_KEY_FLAMANTE}`,
                 'Content-Type': 'application/json'
             }
         });
@@ -18,35 +18,36 @@ const getSubmissions = async (url) => {
 
 const getFormAllByIdSubmissions = async (req, res, next) => {
     const formId = process.env.FORM_ID;
-    const secondFormId = process.env.FORM_SECOND_ID;
-    const page = 1;
     const limit = 100;
 
-    if (!formId || !secondFormId) {
-        return res.status(400).json({ error: 'El formId y secondFormId son requeridos' });
+    if (!formId) {
+        return res.status(400).json({ error: 'El FORM_ID es requerido en las variables de entorno' });
     }
 
-    const firstFormUrl = `https://rest.gohighlevel.com/v1/forms/submissions?page=${page}&limit=${limit}&formId=${formId}`;
-    const secondFormUrl = `https://rest.gohighlevel.com/v1/forms/submissions?page=${page}&limit=${limit}&formId=${secondFormId}`;
+    let page = 1;
+    let allSubmissions = [];
+    let hasMore = true;
 
     try {
-        // Ejecutamos ambas llamadas en paralelo
-        const [primeraRespuesta, segundaRespuesta] = await Promise.all([
-            getSubmissions(firstFormUrl),
-            getSubmissions(secondFormUrl)
-        ]);
+        while (hasMore) {
+            const url = `https://rest.gohighlevel.com/v1/forms/submissions?page=${page}&limit=${limit}&formId=${formId}`;
+            const submissions = await getSubmissions(url);
 
-        // Combinamos ambas respuestas en un solo array
-        const combinedSubmissions = [
-            ...primeraRespuesta,
-            ...segundaRespuesta
-        ];
+            if (!Array.isArray(submissions)) {
+                throw new Error('La respuesta del formulario no es un arreglo');
+            }
 
-        //console.log(combinedSubmissions, 'combinedSubmissions all')
+            allSubmissions = allSubmissions.concat(submissions);
 
-        // Asignamos al body para el siguiente middleware
-        req.body.submissions = combinedSubmissions;
+            // Si recibimos menos del límite, significa que ya no hay más páginas
+            if (submissions.length < limit) {
+                hasMore = false;
+            } else {
+                page++;
+            }
+        }
 
+        req.body.submissions = allSubmissions;
         next();
     } catch (error) {
         console.error('Error al obtener datos:', error.message);
@@ -56,5 +57,6 @@ const getFormAllByIdSubmissions = async (req, res, next) => {
         });
     }
 };
+
 
 module.exports = getFormAllByIdSubmissions;
