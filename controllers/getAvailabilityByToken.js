@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const getAvailabilityByToken = async (req) => {
+const getAvailabilityByToken = async (req, res) => {
   const { fecha, numberPerson, experienceId } = req.body;
   const accessToken = req.accessToken;
   console.log(fecha, numberPerson, experienceId)
