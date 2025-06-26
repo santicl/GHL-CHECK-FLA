@@ -36,11 +36,11 @@ const getAvailabilityByToken = async (req, res) => {
 
     // Si no hay disponibilidad
     if (data.length === 0) {
-      return {
+      return res.json({
         msg: 'No hay disponibilidad para esta fecha.',
         ava: false,
         avaNumber: 0
-      };
+      });
     }
 
     // Suponiendo que solo te interesa el primer slot disponible
