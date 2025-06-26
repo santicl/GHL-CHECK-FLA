@@ -14,7 +14,7 @@ const getAvailabilityByToken = async (req) => {
   const params = {
     fromDateTime: `${fecha}T00:00:00`,
     toDateTime: `${fecha}T23:59:59`,
-    group_size: numberPerson
+    group_size: `${numberPerson}`
   };
 
   console.log(params)
