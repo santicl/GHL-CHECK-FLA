@@ -51,19 +51,19 @@ const getAvailabilityByToken = async (req) => {
 
     // No hay suficientes cupos
     if (parseInt(params.group_size) > availablePlaces) {
-      return {
+      return res.json({
         msg: 'No hay cupos suficientes.',
         ava: false,
         avaNumber: availablePlaces
-      };
+      });
     }
 
     // Hay cupos suficientes
-    return {
+    return res.json({
       msg: 'Hay cupos suficientes.',
       ava: true,
       avaNumber: availablePlaces
-    };
+    });
 
   } catch (error) {
     console.error('❌ Error en getAvailabilityByToken:', error.message);
