@@ -28,11 +28,11 @@ const getAvailabilityByToken = async (req) => {
       params
     });
 
-    console.log(response)
+    console.log('Respuesta Data: ', response.data?.data)
 
     const data = response.data?.data || [];
 
-    console.log(data)
+    console.log('data: { data: []}: ', data)
 
     // Si no hay disponibilidad
     if (data.length === 0) {
