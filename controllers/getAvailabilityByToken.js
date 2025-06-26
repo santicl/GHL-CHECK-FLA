@@ -28,7 +28,11 @@ const getAvailabilityByToken = async (req) => {
       params
     });
 
+    console.log(response)
+
     const data = response.data?.data || [];
+
+    console.log(data)
 
     // Si no hay disponibilidad
     if (data.length === 0) {
@@ -42,6 +46,8 @@ const getAvailabilityByToken = async (req) => {
     // Suponiendo que solo te interesa el primer slot disponible
     const firstAvailable = data[0];
     const availablePlaces = firstAvailable.vacancies || 0;
+
+    console.log(firstAvailable, availablePlaces)
 
     // No hay suficientes cupos
     if (groupSize > availablePlaces) {
