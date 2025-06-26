@@ -50,7 +50,7 @@ const getAvailabilityByToken = async (req) => {
     console.log(firstAvailable, availablePlaces)
 
     // No hay suficientes cupos
-    if (groupSize > availablePlaces) {
+    if (parseInt(params.group_size) > availablePlaces) {
       return {
         msg: 'No hay cupos suficientes.',
         ava: false,
