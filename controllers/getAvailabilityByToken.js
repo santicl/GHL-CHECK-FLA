@@ -3,6 +3,7 @@ const axios = require('axios');
 const getAvailabilityByToken = async (req) => {
   const { fecha, numberPerson, experienceId } = req.body;
   const accessToken = req.accessToken;
+  console.log(fecha, numberPerson, experienceId)
 
   if (!accessToken) {
     throw new Error('Access token no disponible en la solicitud');
@@ -15,6 +16,8 @@ const getAvailabilityByToken = async (req) => {
     toDateTime: `${fecha}T23:59:59`,
     group_size: numberPerson
   };
+
+  console.log(params)
 
   try {
     const response = await axios.get(baseUrl, {
