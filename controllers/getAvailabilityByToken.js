@@ -3,17 +3,34 @@ const axios = require('axios');
 const getAvailabilityByToken = async (req, res) => {
   const { fecha, numberPerson, experienceId } = req.body;
   const accessToken = req.accessToken;
+  var start = ''
+  var end = ''
   console.log(fecha, numberPerson, experienceId)
 
   if (!accessToken) {
     throw new Error('Access token no disponible en la solicitud');
   }
 
+  if (experienceId === 1990) {
+    start = 'T19:30:00'
+    end = 'T21:30:00'
+  }
+
+    if (experienceId === 1989) {
+    start = 'T17:30:00'
+    end = ''
+  }
+
+  if (experienceId === 1986) {
+    start = 'T08:30:00'
+    end = 'T15:00:00'
+  }
+
   const baseUrl = `https://api.utriper.com/api/v1.1.1/experience/${experienceId}/availabilty`;
 
   const params = {
-    fromDateTime: `${fecha}T00:00:00`,
-    toDateTime: `${fecha}T23:59:59`,
+    fromDateTime: `${fecha}${start}`,
+    toDateTime: `${fecha}${end}`,
     group_size: `${numberPerson}`
   };
 
