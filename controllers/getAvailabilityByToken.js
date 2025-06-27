@@ -3,8 +3,8 @@ const axios = require('axios');
 const getAvailabilityByToken = async (req, res) => {
   const { fecha, numberPerson, experienceId } = req.body;
   const accessToken = req.accessToken;
-  var start = ''
-  var end = ''
+  var start = 'T00:00:00'
+  var end = 'T23:59:59'
   console.log(fecha, numberPerson, experienceId)
 
   if (!accessToken) {
@@ -12,18 +12,18 @@ const getAvailabilityByToken = async (req, res) => {
   }
 
   // Fiesta
-  if (experienceId === 1990) {
+  if (experienceId == 1990) {
     start = 'T00:00:00'
     end = 'T23:59:59'
   }
 
   //
-    if (experienceId === 1989) {
+    if (experienceId == 1989) {
     start = 'T00:00:00'
     end = 'T23:59:59'
   }
 
-  if (experienceId === 1986) {
+  if (experienceId == 1986) {
     start = 'T17:00:00'
     end = ''
   }
