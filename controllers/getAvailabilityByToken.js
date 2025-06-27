@@ -11,26 +11,28 @@ const getAvailabilityByToken = async (req, res) => {
     throw new Error('Access token no disponible en la solicitud');
   }
 
+  // Fiesta
   if (experienceId === 1990) {
-    start = 'T19:30:00'
-    end = 'T21:30:00'
+    start = 'T00:00:00'
+    end = 'T23:59:59'
   }
 
+  //
     if (experienceId === 1989) {
-    start = 'T17:30:00'
-    end = ''
+    start = 'T00:00:00'
+    end = 'T23:59:59'
   }
 
   if (experienceId === 1986) {
-    start = 'T08:30:00'
-    end = 'T15:00:00'
+    start = 'T17:00:00'
+    end = ''
   }
 
   const baseUrl = `https://api.utriper.com/api/v1.1.1/experience/${experienceId}/availabilty`;
 
   const params = {
-    fromDateTime: `${fecha}${start}`,
-    toDateTime: `${fecha}${end}`,
+    fromDateTime: `${fecha}${start}Z`,
+    toDateTime: `${fecha}${end}Z`,
     group_size: `${numberPerson}`
   };
 
