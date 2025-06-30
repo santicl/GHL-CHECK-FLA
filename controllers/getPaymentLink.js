@@ -10,7 +10,8 @@ const getPaymentLink = async (req, res) => {
   const payload = {
     items,
     callbackURL,
-    code
+    code,
+    overrideAvailability: true
   }
 
   console.log(payload)
