@@ -52,6 +52,7 @@ async function getValidAccessToken(req, res, next) {
     console.log('🔄 Access token inválido o expirado. Renovando...');
     req.accessToken = await refreshAccessToken();
     console.log(req.accessToken)
+    console.log(req)
     next()
 }
 

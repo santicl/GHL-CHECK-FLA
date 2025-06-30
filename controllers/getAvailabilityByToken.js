@@ -13,26 +13,37 @@ const getAvailabilityByToken = async (req, res) => {
 
   // Fiesta
   if (experienceId == 1990) {
-    start = 'T00:00:00'
-    end = 'T23:59:59'
+    console.log('Fiesta ID: ', experienceId)
+    start = 'T00:30:00.000'
+    end = 'T02:30:00.000'
   }
 
-  //
+  // Sunset Flamante
     if (experienceId == 1989) {
-    start = 'T00:00:00'
-    end = 'T23:59:59'
+    console.log('Sunset Flamante ID: ', experienceId)
+    start = 'T17:00:00.000-05:00'
+    end = 'T19:00:00.000-05:00'
   }
 
+  // Islas del Rosario
   if (experienceId == 1986) {
-    start = 'T17:00:00'
-    end = ''
+    console.log('Islas del Rosario ID: ', experienceId)
+    start = 'T09:00:00.000'
+    end = 'T16:00:00.000'
+  }
+
+    // Day Tour
+  if (experienceId == 2520) {
+    console.log('Day Tour ID: ', experienceId)
+    start = 'T08:45:00.000'
+    end = 'T15:30:00.000'
   }
 
   const baseUrl = `https://api.utriper.com/api/v1.1.1/experience/${experienceId}/availabilty`;
 
   const params = {
-    fromDateTime: `${fecha}${start}Z`,
-    toDateTime: `${fecha}${end}Z`,
+    fromDateTime: `${fecha}${start}`,
+    toDateTime: `${fecha}${end}`,
     group_size: `${numberPerson}`
   };
 
@@ -51,7 +62,7 @@ const getAvailabilityByToken = async (req, res) => {
 
     const data = response.data?.data || [];
 
-    console.log('data: { data: []}: ', data)
+    //console.log('data: { data: []}: ', data)
 
     // Si no hay disponibilidad
     if (data.length === 0) {

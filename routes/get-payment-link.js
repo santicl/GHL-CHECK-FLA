@@ -5,13 +5,13 @@ const getCustomFields = require('../middleware/getCustomField');
 const getAllExperiences = require('../controllers/getAllExperienceByToken');
 const getClientToken = require('../services/getClientToken');
 const getValidAccessToken = require('../services/verifyClientToken');
-const getAvailabilityByToken = require('../controllers/getAvailabilityByToken');
+const getPaymentLink = require('../controllers/getPaymentLink');
 const router = express.Router();
 
 router.post('/',
     getClientToken,
     getValidAccessToken,
-    getAvailabilityByToken
+    getPaymentLink
 );
 
 module.exports = router;
